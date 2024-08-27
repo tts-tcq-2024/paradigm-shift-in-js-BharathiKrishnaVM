@@ -12,6 +12,15 @@ function batteryIsOk(temperature,  soc,  chargeRate) {
     return true;
 }
 
+function checkTemperature(temperature){
+    if(temperature < 0 || temperature > 45){
+         console.log("Temperature is out of range!");
+        return false;
+    }
+}
+
+
+
 function  ExpectTrue(expression) {
     if(!expression) {
         console.log("Expected true, but got false");
@@ -28,7 +37,6 @@ function main() {
     ExpectTrue(batteryIsOk(25, 70, 0.7));
     ExpectFalse(batteryIsOk(50, 85, 0.0));
     console.log("All ok");
-    return 0;
 }
 
 main();
