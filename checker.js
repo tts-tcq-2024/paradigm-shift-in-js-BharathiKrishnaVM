@@ -1,33 +1,34 @@
-function batteryIsOk(temperature,  soc,  chargeRate) {
-    if(temperature < 0 || temperature > 45) {
-        console.log("Temperature is out of range!");
-        return false;
-    } else if(soc < 20 || soc > 80) {
-        console.log("State of Charge is out of range!");
-        return false;
-    } else if(chargeRate > 0.8) {
-        console.log("Charge Rate is out of range!");
-        return false;
-    }
-    return true;
+// Pure function to check temperature
+function isTemperatureOk(temperature) {
+    return temperature >= 0 && temperature <= 45;
 }
 
-function  ExpectTrue(expression) {
-    if(!expression) {
-        console.log("Expected true, but got false");
-        
-    }
+// Pure function to check state of charge
+function isSocOk(soc) {
+    return soc >= 20 && soc <= 80;
 }
-function ExpectFalse(expression) {
-    if(expression) {
-        console.log("Expected false, but got true");
-        Environment.Exit(1);
-    }
+
+// Pure function to check charge rate
+function isChargeRateOk(chargeRate) {
+    return chargeRate <= 0.8;
 }
+
+// Pure function to check if the battery is okay
+function batteryIsOk(temperature, soc, chargeRate) {
+    return isTemperatureOk(temperature) && isSocOk(soc) && isChargeRateOk(chargeRate);
+}
+
+function expectTrue(expression) {
+    return expression ? "Passed" : "Expected true, but got false";
+}
+
+function expectFalse(expression) {
+    return expression ? "Expected false, but got true" : "Passed";
+}
+
 function main() {
-    ExpectTrue(batteryIsOk(25, 70, 0.7));
-    ExpectFalse(batteryIsOk(50, 85, 0.0));
-    console.log("All ok");
+    console.log(expectTrue(batteryIsOk(25, 70, 0.7))); // Expected "Passed"
+    console.log(expectFalse(batteryIsOk(50, 85, 0.0))); // Expected "Expected false, but got true"
 }
 
 main();
