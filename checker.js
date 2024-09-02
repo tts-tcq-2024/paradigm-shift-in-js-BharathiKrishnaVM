@@ -28,7 +28,6 @@ function main() {
     ExpectTrue(batteryIsOk(25, 70, 0.7));
     ExpectFalse(batteryIsOk(50, 85, 0.0));
     console.log("All ok");
-    return 0;
 }
 
 main();
